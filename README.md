@@ -1,9 +1,9 @@
 memoist2
 ========
 
-[![Build Status](https://travis-ci.org/matthewrudy/memoist2.png?branch=master)](https://travis-ci.org/matthewrudy/memoist2)
+[![Circle CI](https://circleci.com/gh/DangerDawson/memoist2.png)](https://circleci.com/gh/DangerDawson/memoist2/tree/master)
 
-Simple Memoization for Ruby 2.0
+A fork of [Memoist2](https://github.com/matthewrudy/memoist2) with some fixes on it
 
 ### Differences between Memoist & Memoist2
 
@@ -25,7 +25,7 @@ Memoize an instance method
 
     class Foo
       include Memoist2
-  
+
       def bar
         sleep 1 && 2**10
       end
@@ -36,7 +36,7 @@ Memoize a class method
 
     class Foo
       include Memoist2
-  
+
       def self.bar
         # something expensive
       end
