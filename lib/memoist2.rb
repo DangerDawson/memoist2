@@ -12,11 +12,20 @@ module Memoist2
       method_names.each do |method_name|
         memoized_ivar = Memoist2.memoized_ivar_for(method_name)
         memoized_module = Module.new do
+
+          def self.inspect; to_s; end
           module_eval <<-EVAL
+            def initialize(*args)
+              #{memoized_ivar} = {}
+              super(*args)
+            end
+
             def #{method_name}(*args)
               #{memoized_ivar} ||= {}
-              unless #{memoized_ivar}[args]
+              if !#{memoized_ivar}[args]
                 #{memoized_ivar}[args] = [super(*args)]
+              elsif #{memoized_ivar}[args].empty?
+                #{memoized_ivar}[args] << super(*args)
               end
               #{memoized_ivar}[args][0]
             end
